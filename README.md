@@ -1,64 +1,90 @@
+好嘞，我来帮你把 `modelscope.json` 这一段也加到你的环境搭建文档里，让用户知道怎么配置。可以在“项目目录结构概览”之后单独加一节说明配置文件内容：
+
+---
+
 ## 前提条件
 
 1. Python 3.10.14
 2. Windows 操作系统
-3. 已安装 **conda** Anaconda 或 Miniconda
+3. 已安装 **conda**（Anaconda 或 Miniconda）
+
+---
 
 ## 搭建环境步骤
 
 ### 步骤 1: 创建虚拟环境
 
-1. 打开终端（命令提示符或 Anaconda Prompt）。
+```bash
+conda create --name lmvrep python=3.10.14
+```
 
-2. 创建虚拟环境并指定 Python 版本：
-
-   ```bash
-   conda create --name lmvrep python=3.10.14
-   ```
+---
 
 ### 步骤 2: 激活虚拟环境
 
-激活刚刚创建的虚拟环境：
+```bash
+conda activate lmvrep
+```
 
-* 运行以下命令来激活 `lmvrep` 环境：
+---
 
-  ```bash
-  conda activate lmvrep
-  ```
+### 步骤 3: 安装依赖
 
-### 步骤 3: 安装所需的依赖包
+1. 确认 `requirements.txt` 文件在项目根目录下。
+2. 安装依赖：
 
-虚拟环境激活后，使用以下命令安装 `requirements.txt` 文件中列出的依赖包：
+```bash
+pip install -r requirements.txt
+```
 
-1. 确保 `requirements.txt` 文件位于项目根目录中。
-2. 运行以下命令来安装依赖：
-
-   ```bash
-   pip install -r requirements.txt
-   ```
+---
 
 ### 步骤 4: 设置仿真环境
 
-1. 仿真环境为CoppeliaSim_Edu_V4_1_0。
-2. windows环境下可以直接下载压缩包解压后使用
-### 步骤 5: 运行仿真
+1. 使用 CoppeliaSim\_Edu\_V4\_1\_0。
+2. Windows 下直接下载压缩包解压使用即可。
 
-要启动仿真并控制无人机，按照以下步骤操作：
+---
 
-1. 打开终端（确保虚拟环境已经激活）。
-2. 打开仿真软件并进入预设场景
-2. 进入包含 `LLM_ctrl.py` 文件的目录。
-3. 运行以下命令启动控制脚本：
+### 步骤 5: 配置 API Key
+
+在项目根目录下的 `modelscope.json` 中填入魔塔社区 API Key 和 OpenAI 配置，文件内容示例：
+
+```json
+{
+    "GIT_KEY": "xxxxxxxxxxxxxxxxxxx",
+    "OPENAI_API_KEY": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "OPENAI_BASE_URL": "https://api-inference.modelscope.cn/v1/"
+}
+```
+
+* `GIT_KEY`： Git 仓库 Key（可选,不影响使用）
+* `OPENAI_API_KEY`：从魔塔社区获取的 API Key
+* `OPENAI_BASE_URL`：魔塔 API 接口地址
+
+---
+
+### 步骤 6: 运行仿真
+
+1. 打开终端并激活虚拟环境：
 
    ```bash
-   python LLM_ctrl.py
+   conda activate lmvrep
    ```
 
-该命令会启动仿真，您可以与仿真进行交互。
+2. 打开 CoppeliaSim 并加载预设场景。
 
-### 项目目录结构概览
+3. 进入包含 `LLM_ctrl.py` 的目录。
 
-以下是项目目录结构：
+4. 运行控制脚本：
+
+```bash
+python LLM_ctrl.py
+```
+
+---
+
+### 项目目录结构
 
 ```
 项目根目录
@@ -74,12 +100,12 @@
 └── simConst.py
 ```
 
-* **data/**: 存放数据文件。
-* **images/**: 存放仿真图像文件。
-* **sim/**: 存放仿真相关文件（包括无人机场景）。
-* **dronellm.py**: 包含 AI 设置和无人机控制代码。
-* **dronecontroller.py**: 包含无人机控制代码。
-* **LLM\_ctrl.py**: 与仿真交互的主要控制脚本。
-* **modelscope.json**: `DroneAI` 类使用的配置文件。
-* **requirements.txt**: 所需的 Python 包列表。
-* **simConst.py**: 仿真常量设置文件。
+* **data/**: 存放数据文件
+* **images/**: 存放仿真图像文件
+* **sim/**: 仿真相关文件（无人机场景等）
+* **dronellm.py**: AI 设置和无人机控制逻辑
+* **dronecontroller.py**: 无人机控制模块
+* **LLM\_ctrl.py**: 主控制脚本
+* **modelscope.json**: 存放 API Key 和服务配置
+* **requirements.txt**: Python 依赖列表
+* **simConst.py**: 仿真常量配置
