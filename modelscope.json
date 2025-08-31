@@ -1,0 +1,5 @@
+{
+    "GIT_KEY": "xxxxxxxxxxxxxxxxxxx",
+    "OPENAI_API_KEY": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "OPENAI_BASE_URL": "https://api-inference.modelscope.cn/v1/"
+}
